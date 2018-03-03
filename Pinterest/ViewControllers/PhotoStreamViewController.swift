@@ -35,7 +35,8 @@ class PhotoStreamViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
   
-  var photos = Photo.allPhotos()
+  
+  let viewModel = PhotoStreamViewModel()
   
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -55,6 +56,19 @@ class PhotoStreamViewController: UIViewController {
     if let layout = collectionView.collectionViewLayout as? PinterestLayout {
       layout.delegate = self
     }
+    
+    // Cute Selfies
+    viewModel.getImagesWithTerm("Selfies", desireNum: 29) { (result) in
+      switch result {
+      case .success(_):
+        print("Success")
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
+      case .failure(let mess):
+        print(mess)
+      }
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +80,7 @@ class PhotoStreamViewController: UIViewController {
 extension PhotoStreamViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return photos.count
+    return viewModel.flickrPhotos.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,16 +90,21 @@ extension PhotoStreamViewController: UICollectionViewDataSource {
         return UICollectionViewCell()
     }
     
-    cell.photo = photos[indexPath.item]
+    cell.photo = viewModel.flickrPhotos[indexPath.item]
     return cell
   }
   
 }
 
 extension PhotoStreamViewController: PinterestLayoutDelegate {
+  
   func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-    return photos[indexPath.item].image.size.height
+    guard let img = viewModel.flickrPhotos[indexPath.item].thumbnail else {
+        return 0
+    }
+    return CGFloat(img.size.height)
   }
+  
 }
 
 extension PhotoStreamViewController: UICollectionViewDelegateFlowLayout {

@@ -10,11 +10,12 @@ import Foundation
 import Alamofire
 import CoreTelephony
 
+
 public enum ImagesRouter: URLRequestConvertible {
   
   static let baseURLPath = "https://api.flickr.com/services/rest"
   
-  case searchContents(String)
+  case searchContents(String, Int)
   
   var method: HTTPMethod {
     switch self {
@@ -35,7 +36,7 @@ public enum ImagesRouter: URLRequestConvertible {
     let parameters: [String: Any] = {
       switch self {
         
-      case .searchContents(let searchTerm):
+      case .searchContents(let searchTerm, let desireNum):
         guard let escapedTerm = searchTerm
           .addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
             print("Search Term is in wrong Format")
@@ -44,8 +45,9 @@ public enum ImagesRouter: URLRequestConvertible {
         
         return [
           "method": "flickr.photos.search",
+          "api_key": Constants.apiKeys.flickr,
           "text": escapedTerm,
-          "per_page": 30,
+          "per_page": desireNum,
           "format": "json",
           "nojsoncallback": "1"
         ]
@@ -56,7 +58,7 @@ public enum ImagesRouter: URLRequestConvertible {
     
     var request = URLRequest(url: url.appendingPathComponent(path))
     request.httpMethod = method.rawValue
-    request.setValue(Constants.apiKeys.flickr, forHTTPHeaderField: "Authorization")
+//    request.setValue(Constants.apiKeys.flickr, forHTTPHeaderField: "Authorization")
     request.timeoutInterval = TimeInterval(10 * 1000)
     
     return try URLEncoding.default.encode(request, with: parameters)

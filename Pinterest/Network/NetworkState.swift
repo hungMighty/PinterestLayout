@@ -13,7 +13,6 @@ import Alamofire
 class NetworkState {
   
   // MARK: - If using Wifi then we can upload images
-  
   func isReachableViaWifi(host: String) -> Bool {
     guard let connectionState = NetworkReachabilityManager(host: host) else {
       print("Wrong Host!")

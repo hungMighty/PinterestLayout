@@ -47,12 +47,10 @@ class AnnotatedPhotoCell: UICollectionViewCell {
     containerView.layer.masksToBounds = true
   }
   
-  var photo: Photo? {
+  var photo: FlickrPhoto? {
     didSet {
       if let photo = photo {
-        imageView.image = photo.image
-        captionLabel.text = photo.caption
-        commentLabel.text = photo.comment
+        imageView.image = photo.thumbnail
       }
     }
   }
