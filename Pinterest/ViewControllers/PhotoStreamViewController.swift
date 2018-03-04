@@ -93,11 +93,16 @@ class PhotoStreamViewController: UIViewController {
   }
   
   fileprivate func invokeSearchWith(Term term: String?) {
+    MyViewUtil.showLoadingIndicator()
     viewModel.getImagesWithTerm(term, desireNum: 29) { [unowned self] (result) in
+      MyViewUtil.removeLoadingIndicator()
+      
       switch result {
       case .success(_):
         print("Success")
         DispatchQueue.main.async {
+          self.searchBar.text = ""
+          self.searchBar.setShowsCancelButton(false, animated: true)
           self.collectionView.reloadData()
         }
       case .failure(let mess):
@@ -156,7 +161,18 @@ extension PhotoStreamViewController: UICollectionViewDelegateFlowLayout {
         return
     }
     
+    MyViewUtil.showLoadingIndicator()
     viewModel.flickrPhotos[indexPath.item].loadLargeImage { [weak self] (flickRPhoto, err) in
+      MyViewUtil.removeLoadingIndicator()
+      
+      if let err = err {
+        let alert = UIAlertController(title: "Error!",
+                                      message: err.localizedDescription,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self?.present(alert, animated: true, completion: nil)
+        return
+      }
       viewController.curImage = flickRPhoto.largeImage
       self?.navigationController?.pushViewController(viewController, animated: true)
     }
