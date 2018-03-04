@@ -23,15 +23,15 @@ class PhotoStreamViewModel {
   
   init() {}
   
-  func getImagesWithTerm(_ searchTerm: String, desireNum: Int,
+  func getImagesWithTerm(_ searchTerm: String?, desireNum: Int,
                          completion: @escaping (PhotoStreamOutput<String>) -> ()) {
-    if searchTerm.isEmpty {
+    guard let term = searchTerm, !term.isEmpty else {
       completion(.failure("Please input a Search Term!"))
       return
     }
     
     Alamofire
-      .request(ImagesRouter.searchContents(searchTerm, desireNum))
+      .request(ImagesRouter.searchContents(term, desireNum))
       .responseJSON { [weak self] response in
         guard response.result.isSuccess else {
           if let errCode = response.response?.statusCode {

@@ -55,4 +55,12 @@ class AnnotatedPhotoCell: UICollectionViewCell {
     }
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    imageView.image = nil
+    captionLabel.text = "Caption"
+    commentLabel.text = "Comment"
+  }
+  
 }

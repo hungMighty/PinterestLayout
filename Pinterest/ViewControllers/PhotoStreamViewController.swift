@@ -33,6 +33,7 @@ import AVFoundation
 
 class PhotoStreamViewController: UIViewController {
   
+  @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var collectionView: UICollectionView!
   
   
@@ -43,22 +44,56 @@ class PhotoStreamViewController: UIViewController {
     return .lightContent
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+  }
+  
   // MARK: - View life cycles
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let patternImage = UIImage(named: "Pattern") {
-      view.backgroundColor = UIColor(patternImage: patternImage)
-    }
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(keyboardWillShow(_:)),
+                                           name: NSNotification.Name.UIKeyboardWillShow,
+                                           object: nil)
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(keyboardDidShow(_:)),
+                                           name: NSNotification.Name.UIKeyboardDidShow,
+                                           object: nil)
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(keyboardDidHide(_:)),
+                                           name: NSNotification.Name.UIKeyboardDidHide,
+                                           object: nil)
+    
+//    if let patternImage = UIImage(named: "Pattern") {
+//      view.backgroundColor = UIColor(patternImage: patternImage)
+//    }
+    
+    view.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.9058823529, blue: 0.9058823529, alpha: 1)
+    customizeSearchBarTheme()
+    
     collectionView?.backgroundColor = .clear
     collectionView?.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
-    
     if let layout = collectionView.collectionViewLayout as? PinterestLayout {
       layout.delegate = self
     }
     
-    // Cute Selfies
-    viewModel.getImagesWithTerm("Selfies", desireNum: 29) { (result) in
+    invokeSearchWith(Term: "Dogs")
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
+  fileprivate func customizeSearchBarTheme() {
+    searchBar.placeholder = "Search"
+    searchBar.barTintColor = UIColor.white
+  }
+  
+  fileprivate func invokeSearchWith(Term term: String?) {
+    viewModel.getImagesWithTerm(term, desireNum: 29) { [unowned self] (result) in
       switch result {
       case .success(_):
         print("Success")
@@ -67,12 +102,11 @@ class PhotoStreamViewController: UIViewController {
         }
       case .failure(let mess):
         print(mess)
+        let alert = UIAlertController(title: "Error!", message: mess, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
       }
     }
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
   }
   
 }
@@ -113,6 +147,41 @@ extension PhotoStreamViewController: UICollectionViewDelegateFlowLayout {
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
     let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
     return CGSize(width: itemSize, height: itemSize)
+  }
+  
+}
+
+extension PhotoStreamViewController: UISearchBarDelegate {
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    self.searchBar.setShowsCancelButton(true, animated: true)
+  }
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    self.searchBar.setShowsCancelButton(false, animated: true)
+    self.searchBar.resignFirstResponder()
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    invokeSearchWith(Term: searchBar.text)
+    self.searchBar.resignFirstResponder()
+  }
+  
+}
+
+// MARK: - Keyboard Observing
+extension PhotoStreamViewController {
+  
+  @objc func keyboardWillShow(_ noti: Notification) {
+  }
+  
+  @objc func keyboardDidShow(_ noti: Notification) {
+  }
+  
+  @objc func keyboardDidHide(_ noti: Notification) {
   }
   
 }

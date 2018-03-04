@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9kd-7x-8Fe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VOx-Dg-ARm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="40r-km-ERH">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="gQw-Fl-QY7" customClass="PinterestLayout" customModule="Pinterest" customModuleProvider="target"/>
                                 <cells>
@@ -48,17 +48,17 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Caption" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwC-z2-5j8">
                                                             <rect key="frame" x="4" y="137" width="172" height="17"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Comment" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKG-x2-cEW">
                                                             <rect key="frame" x="4" y="156" width="172" height="14"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.047143883999999997" green="0.36116248369999998" blue="0.163305968" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="gwC-z2-5j8" firstAttribute="leading" secondItem="f85-pO-lHG" secondAttribute="leading" constant="4" id="7Ma-3x-SfM"/>
                                                         <constraint firstItem="HEt-b8-1Wf" firstAttribute="leading" secondItem="f85-pO-lHG" secondAttribute="leading" id="IZm-py-gkO"/>
@@ -99,22 +99,52 @@
                                     <outlet property="delegate" destination="9kd-7x-8Fe" id="xkh-ox-oNh"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Vh5-HN-8XD">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9kd-7x-8Fe" id="qzq-aX-7Mx"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="40r-km-ERH" firstAttribute="top" secondItem="dHR-49-G73" secondAttribute="bottom" id="8Hn-aA-8n5"/>
+                            <constraint firstItem="Vh5-HN-8XD" firstAttribute="leading" secondItem="KRl-gl-iAd" secondAttribute="leading" id="0I7-4M-b7v"/>
+                            <constraint firstAttribute="trailing" secondItem="Vh5-HN-8XD" secondAttribute="trailing" id="2FB-fV-rGu"/>
+                            <constraint firstItem="40r-km-ERH" firstAttribute="top" secondItem="Vh5-HN-8XD" secondAttribute="bottom" id="5CW-Lq-Ppa"/>
+                            <constraint firstItem="Vh5-HN-8XD" firstAttribute="top" secondItem="dHR-49-G73" secondAttribute="bottom" id="She-FN-eR7"/>
                             <constraint firstItem="fGr-rT-3AC" firstAttribute="top" secondItem="40r-km-ERH" secondAttribute="bottom" id="XIn-g8-Frt"/>
                             <constraint firstItem="40r-km-ERH" firstAttribute="leading" secondItem="KRl-gl-iAd" secondAttribute="leading" id="k9m-IO-u00"/>
                             <constraint firstAttribute="trailing" secondItem="40r-km-ERH" secondAttribute="trailing" id="wef-Zy-Pgo"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Images Collection" id="rg7-ES-axo"/>
                     <connections>
                         <outlet property="collectionView" destination="40r-km-ERH" id="IwZ-Bu-dPE"/>
+                        <outlet property="searchBar" destination="Vh5-HN-8XD" id="D6J-R0-66l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3e-PT-8Sy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1361" y="377"/>
+            <point key="canvasLocation" x="1700" y="375.56221889055473"/>
+        </scene>
+        <!--Custom Navigation Controller-->
+        <scene sceneID="aZT-Pe-WWV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VOx-Dg-ARm" customClass="CustomNavigationController" customModule="Pinterest" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6bY-Xj-gJo">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9kd-7x-8Fe" kind="relationship" relationship="rootViewController" id="fva-tt-t7P"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="heQ-gN-lAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="778" y="376"/>
         </scene>
     </scenes>
 </document>
