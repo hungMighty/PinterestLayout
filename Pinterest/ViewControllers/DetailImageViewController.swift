@@ -36,6 +36,8 @@ class DetailImageViewController: UIViewController {
     showMyImage()
   }
   
+  // MARK: - Orientation
+  
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     

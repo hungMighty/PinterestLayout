@@ -76,15 +76,42 @@ class PhotoStreamViewController: UIViewController {
     
     collectionView?.backgroundColor = .clear
     collectionView?.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
-    if let layout = collectionView.collectionViewLayout as? PinterestLayout {
-      layout.delegate = self
-    }
+    loadCollectionViewCustomLayout()
     
-    invokeSearchWith(Term: "Dogs")
+    invokeSearchWith(Term: "Ocean")
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+  }
+  
+  // MARK: - Orientation
+  
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
+    
+    DispatchQueue.main.async {
+      self.loadCollectionViewCustomLayout()
+    }
+  }
+  
+  fileprivate func loadCollectionViewCustomLayout() {
+    self.collectionView.collectionViewLayout.invalidateLayout()
+    
+    var layout: PinterestLayout
+    let orientation = UIApplication.shared.statusBarOrientation
+    let isPortrait = orientation == .portrait || orientation == .portraitUpsideDown
+    if isPortrait {
+      layout = PinterestLayout(columnsNum: 2)
+    } else {
+      layout = PinterestLayout(columnsNum: 3)
+    }
+    layout.delegate = self
+    self.collectionView.collectionViewLayout = layout
   }
   
   fileprivate func customizeSearchBarTheme() {
@@ -94,7 +121,7 @@ class PhotoStreamViewController: UIViewController {
   
   fileprivate func invokeSearchWith(Term term: String?) {
     MyViewUtil.showLoadingIndicator()
-    viewModel.getImagesWithTerm(term, desireNum: 29) { [unowned self] (result) in
+    viewModel.getImagesWithTerm(term, desireNum: 21) { [unowned self] (result) in
       MyViewUtil.removeLoadingIndicator()
       
       switch result {
@@ -171,9 +198,11 @@ extension PhotoStreamViewController: UICollectionViewDelegateFlowLayout {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self?.present(alert, animated: true, completion: nil)
+        
         return
       }
       viewController.curImage = flickRPhoto.largeImage
+      self?.searchBar.resignFirstResponder()
       self?.navigationController?.pushViewController(viewController, animated: true)
     }
   }

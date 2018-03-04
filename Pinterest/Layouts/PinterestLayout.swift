@@ -38,6 +38,20 @@ class PinterestLayout: UICollectionViewLayout {
     return CGSize(width: contentWidth, height: contentHeight)
   }
   
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  override init() {
+    super.init()
+  }
+  
+  convenience init(columnsNum: Int) {
+    self.init()
+    
+    numberOfColumns = columnsNum
+  }
+  
   override func prepare() {
     super.prepare()
     
