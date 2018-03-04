@@ -149,6 +149,19 @@ extension PhotoStreamViewController: UICollectionViewDelegateFlowLayout {
     return CGSize(width: itemSize, height: itemSize)
   }
   
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let viewController = UIStoryboard(name: "Main", bundle: nil)
+      .instantiateViewController(withIdentifier: DetailImageViewController.id)
+      as? DetailImageViewController else {
+        return
+    }
+    
+    viewModel.flickrPhotos[indexPath.item].loadLargeImage { [weak self] (flickRPhoto, err) in
+      viewController.curImage = flickRPhoto.largeImage
+      self?.navigationController?.pushViewController(viewController, animated: true)
+    }
+  }
+  
 }
 
 extension PhotoStreamViewController: UISearchBarDelegate {
