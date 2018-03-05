@@ -134,8 +134,8 @@ class PhotoStreamViewController: UIViewController {
           self.searchBar.text = ""
           self.searchBar.setShowsCancelButton(false, animated: true)
           
-//          self.loadCollectionViewCustomLayout()
           self.collectionView.reloadData()
+          self.loadCollectionViewCustomLayout()
         }
       case .failure(let mess):
         print(mess)
