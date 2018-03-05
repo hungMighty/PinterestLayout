@@ -76,6 +76,9 @@ class PhotoStreamViewController: UIViewController {
     
     collectionView?.backgroundColor = .clear
     collectionView?.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
+//    if #available(iOS 10, *) {
+//      collectionView.isPrefetchingEnabled = false
+//    }
     loadCollectionViewCustomLayout()
     
     invokeSearchWith(Term: "Ocean")
@@ -94,24 +97,24 @@ class PhotoStreamViewController: UIViewController {
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     
-    DispatchQueue.main.async {
-      self.loadCollectionViewCustomLayout()
-    }
+    loadCollectionViewCustomLayout()
   }
   
   fileprivate func loadCollectionViewCustomLayout() {
-    self.collectionView.collectionViewLayout.invalidateLayout()
-    
-    var layout: PinterestLayout
-    let orientation = UIApplication.shared.statusBarOrientation
-    let isPortrait = orientation == .portrait || orientation == .portraitUpsideDown
-    if isPortrait {
-      layout = PinterestLayout(columnsNum: 2)
-    } else {
-      layout = PinterestLayout(columnsNum: 3)
+    DispatchQueue.main.async {
+      self.collectionView.collectionViewLayout.invalidateLayout()
+      
+      var layout: PinterestLayout
+      let orientation = UIApplication.shared.statusBarOrientation
+      let isPortrait = orientation == .portrait || orientation == .portraitUpsideDown
+      if isPortrait {
+        layout = PinterestLayout(columnsNum: 2)
+      } else {
+        layout = PinterestLayout(columnsNum: 3)
+      }
+      layout.delegate = self
+      self.collectionView.collectionViewLayout = layout
     }
-    layout.delegate = self
-    self.collectionView.collectionViewLayout = layout
   }
   
   fileprivate func customizeSearchBarTheme() {
@@ -130,6 +133,8 @@ class PhotoStreamViewController: UIViewController {
         DispatchQueue.main.async {
           self.searchBar.text = ""
           self.searchBar.setShowsCancelButton(false, animated: true)
+          
+//          self.loadCollectionViewCustomLayout()
           self.collectionView.reloadData()
         }
       case .failure(let mess):

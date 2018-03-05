@@ -38,6 +38,7 @@ class PinterestLayout: UICollectionViewLayout {
     return CGSize(width: contentWidth, height: contentHeight)
   }
   
+  
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
@@ -99,6 +100,9 @@ class PinterestLayout: UICollectionViewLayout {
   }
   
   override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    guard cache.count > 0, indexPath.item > (cache.count - 1) else {
+      return nil
+    }
     return cache[indexPath.item]
   }
   

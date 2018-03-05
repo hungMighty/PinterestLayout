@@ -44,9 +44,9 @@ class PhotoStreamViewModel {
         }
         
         guard let resultsDictionary = response.result.value as? [String: Any],
-        let photosContainer = resultsDictionary["photos"] as? [String: Any],
-        let photosReceived = photosContainer["photo"] as? [[String: Any]]
-         else {
+          let photosContainer = resultsDictionary["photos"] as? [String: Any],
+          let photosReceived = photosContainer["photo"] as? [[String: Any]]
+          else {
             completion(.failure("Fail to parse images json"))
             return
         }
