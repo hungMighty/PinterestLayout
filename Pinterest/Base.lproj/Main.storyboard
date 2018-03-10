@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VOx-Dg-ARm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VOx-Dg-ARm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -19,10 +20,6 @@
         <scene sceneID="QIh-Z1-glC">
             <objects>
                 <viewController id="9kd-7x-8Fe" userLabel="Photo Stream View Controller" customClass="PhotoStreamViewController" customModule="Pinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dHR-49-G73"/>
-                        <viewControllerLayoutGuide type="bottom" id="fGr-rT-3AC"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KRl-gl-iAd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -110,14 +107,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Vh5-HN-8XD" firstAttribute="leading" secondItem="KRl-gl-iAd" secondAttribute="leading" id="0I7-4M-b7v"/>
-                            <constraint firstAttribute="trailing" secondItem="Vh5-HN-8XD" secondAttribute="trailing" id="2FB-fV-rGu"/>
+                            <constraint firstItem="Vh5-HN-8XD" firstAttribute="leading" secondItem="4p1-wS-zXE" secondAttribute="leading" id="0I7-4M-b7v"/>
+                            <constraint firstItem="4p1-wS-zXE" firstAttribute="trailing" secondItem="Vh5-HN-8XD" secondAttribute="trailing" id="2FB-fV-rGu"/>
                             <constraint firstItem="40r-km-ERH" firstAttribute="top" secondItem="Vh5-HN-8XD" secondAttribute="bottom" id="5CW-Lq-Ppa"/>
-                            <constraint firstItem="Vh5-HN-8XD" firstAttribute="top" secondItem="dHR-49-G73" secondAttribute="bottom" id="She-FN-eR7"/>
-                            <constraint firstItem="fGr-rT-3AC" firstAttribute="top" secondItem="40r-km-ERH" secondAttribute="bottom" id="XIn-g8-Frt"/>
-                            <constraint firstItem="40r-km-ERH" firstAttribute="leading" secondItem="KRl-gl-iAd" secondAttribute="leading" id="k9m-IO-u00"/>
-                            <constraint firstAttribute="trailing" secondItem="40r-km-ERH" secondAttribute="trailing" id="wef-Zy-Pgo"/>
+                            <constraint firstItem="Vh5-HN-8XD" firstAttribute="top" secondItem="4p1-wS-zXE" secondAttribute="top" id="She-FN-eR7"/>
+                            <constraint firstItem="4p1-wS-zXE" firstAttribute="bottom" secondItem="40r-km-ERH" secondAttribute="bottom" id="XIn-g8-Frt"/>
+                            <constraint firstItem="40r-km-ERH" firstAttribute="leading" secondItem="4p1-wS-zXE" secondAttribute="leading" id="k9m-IO-u00"/>
+                            <constraint firstItem="4p1-wS-zXE" firstAttribute="trailing" secondItem="40r-km-ERH" secondAttribute="trailing" id="wef-Zy-Pgo"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="4p1-wS-zXE"/>
                     </view>
                     <navigationItem key="navigationItem" title="Images Collection" id="rg7-ES-axo"/>
                     <connections>
@@ -151,10 +149,6 @@
         <scene sceneID="UTu-SG-gNg">
             <objects>
                 <viewController storyboardIdentifier="DetailImageViewController" title="Detail Image" id="5RN-bI-BXU" userLabel="Detail Image View Controller" customClass="DetailImageViewController" customModule="Pinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qD0-fv-2iW"/>
-                        <viewControllerLayoutGuide type="bottom" id="zJi-Fl-f36"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oLh-Zh-VQe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,11 +175,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="YFu-pZ-086" firstAttribute="leading" secondItem="oLh-Zh-VQe" secondAttribute="leading" id="0eq-s8-6s4"/>
-                            <constraint firstItem="YFu-pZ-086" firstAttribute="top" secondItem="qD0-fv-2iW" secondAttribute="bottom" id="Vbf-0n-HtV"/>
-                            <constraint firstAttribute="trailing" secondItem="YFu-pZ-086" secondAttribute="trailing" id="adS-KR-iWZ"/>
-                            <constraint firstItem="zJi-Fl-f36" firstAttribute="top" secondItem="YFu-pZ-086" secondAttribute="bottom" id="xft-k3-ewH"/>
+                            <constraint firstItem="YFu-pZ-086" firstAttribute="leading" secondItem="a26-WW-3z3" secondAttribute="leading" id="0eq-s8-6s4"/>
+                            <constraint firstItem="YFu-pZ-086" firstAttribute="top" secondItem="a26-WW-3z3" secondAttribute="top" id="Vbf-0n-HtV"/>
+                            <constraint firstItem="a26-WW-3z3" firstAttribute="trailing" secondItem="YFu-pZ-086" secondAttribute="trailing" id="adS-KR-iWZ"/>
+                            <constraint firstItem="a26-WW-3z3" firstAttribute="bottom" secondItem="YFu-pZ-086" secondAttribute="bottom" id="xft-k3-ewH"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="a26-WW-3z3"/>
                     </view>
                     <connections>
                         <outlet property="myImageView" destination="6kl-KV-YI7" id="qmd-vB-Y9h"/>
