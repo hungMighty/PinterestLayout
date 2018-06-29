@@ -229,7 +229,6 @@
 				7B0AC7B31AAEF90000885D4A /* Frameworks */,
 				7B0AC7B41AAEF90000885D4A /* Resources */,
 				22776DD9E38A52DCB55DC5F7 /* [CP] Embed Pods Frameworks */,
-				18DAB6EEF025EE6EB46646DF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -290,21 +289,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18DAB6EEF025EE6EB46646DF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pinterest/Pods-Pinterest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		22776DD9E38A52DCB55DC5F7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
